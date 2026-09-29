@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Jungle - MC Autobattler Wiki</title>
+<style>
+:root{--bg:#fff;--fg:#1c1c1e;--mute:#6b6b70;--line:#e6e6e9;--soft:#f6f6f8;--accent:#3b5bdb;
+--c1:#8d8d93;--c2:#2f9e44;--c3:#1c7ed6;--c4:#9c36b5;--c5:#e8a317}
+@media(prefers-color-scheme:dark){:root{--c1:#a3a3ab;--bg:#141416;--fg:#e8e8ea;--mute:#8e8e95;--line:#2a2a2e;--soft:#1c1c1f;--accent:#7c93f5}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--line);position:relative}
+header div.bar{max-width:920px;margin:0 auto;padding:14px 24px;display:flex;gap:22px;align-items:center}
+header .brand{font-weight:650;color:var(--fg)}header nav{display:flex;gap:18px;flex:1}
+header nav a{color:var(--mute)}header nav a.on{color:var(--fg)}
+.search{position:relative}
+.search input{font:inherit;padding:5px 10px;border:1px solid var(--line);border-radius:6px;background:var(--soft);color:var(--fg);width:190px}
+.results{position:absolute;right:0;top:36px;width:280px;background:var(--bg);border:1px solid var(--line);border-radius:8px;z-index:9;display:none;overflow:hidden}
+.results a{display:flex;justify-content:space-between;gap:10px;padding:6px 12px;color:var(--fg)}
+.results a:hover,.results a.sel{background:var(--soft);text-decoration:none}.results small{color:var(--mute)}
+main{max-width:920px;margin:0 auto;padding:36px 24px 72px}
+footer{max-width:920px;margin:0 auto;padding:0 24px 40px;color:var(--mute);font-size:13px}
+.crumb{color:var(--mute);font-size:13px;margin-bottom:6px}
+h1{font-size:30px;line-height:1.2;margin:0 0 4px;letter-spacing:-.02em}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin:40px 0 12px;font-weight:600}
+h2 a{color:var(--accent)}
+.sub{color:var(--mute);margin:0 0 20px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}
+.tag{border:1px solid var(--line);border-radius:999px;padding:1px 11px;font-size:13px;color:var(--fg)}
+.cost{font-weight:600}.cost1{color:var(--c1)}.cost2{color:var(--c2)}.cost3{color:var(--c3)}.cost4{color:var(--c4)}.cost5{color:var(--c5)}
+a.c1{color:var(--c1)}a.c2{color:var(--c2)}a.c3{color:var(--c3)}a.c4{color:var(--c4)}a.c5{color:var(--c5)}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;color:var(--mute);font-size:13px}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.top{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch;margin-top:12px}
+@media(max-width:700px){.top{grid-template-columns:1fr}}
+.who{background:var(--soft);border-top:3px solid var(--cc);border-radius:12px;padding:24px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.who .id{display:flex;gap:20px;align-items:center}
+.who img{flex:none;width:112px;height:112px;object-fit:contain;background:var(--bg);border-radius:12px;padding:10px;box-shadow:0 0 0 2px color-mix(in srgb,var(--cc) 45%,transparent)}
+.who h1{font-size:34px}.who .sub{margin:2px 0 0;font-size:16px}
+.who .tags{margin:0}.who .tag{background:color-mix(in srgb,var(--cc) 10%,var(--bg));border-color:color-mix(in srgb,var(--cc) 35%,var(--line))}
+.badge{border:1px dashed color-mix(in srgb,var(--cc) 55%,var(--line));background:color-mix(in srgb,var(--cc) 6%,transparent);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--mute)}
+.badge b{color:var(--cc);font-weight:600}
+.stats{border:1px solid var(--line);border-top:3px solid var(--cc);border-radius:12px;padding:8px 14px;display:flex;align-items:center}
+.stats table{margin:0}.stats tr:last-child td{border-bottom:0}.stats td:first-child{color:var(--mute)}.stats td.n{font-weight:600}
+.card{background:var(--soft);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px}
+.card h3{margin:0 0 6px;font-size:16px;color:var(--accent)}.card p{margin:6px 0}
+.eff{margin:6px 0 0;padding-left:18px}.eff li{margin:2px 0}.eff b{color:var(--accent)}
+.bp{display:flex;gap:14px;padding:6px 0;border-bottom:1px solid var(--line)}
+.bp b{min-width:26px;color:var(--accent)}
+.roster{display:flex;gap:8px;flex-wrap:wrap}
+.roster a{border:1px solid var(--line);border-radius:6px;padding:2px 10px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.tile{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px 10px;color:var(--fg)}
+.tile:hover{text-decoration:none;border-color:var(--mute)}
+.tile img{width:36px;height:36px;object-fit:contain;flex:none}
+.tile b{display:block;font-weight:600;line-height:1.2}.tile small{color:var(--mute);font-size:12px;line-height:1.2;display:block}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 0;align-items:center}
+.filters button,.filters select,.filters input{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--fg);padding:3px 12px;cursor:pointer}
+.filters input{border-radius:6px;cursor:text}
+.filters button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.hide{display:none!important}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.tcard{border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--fg)}
+.tcard:hover{text-decoration:none;border-color:var(--mute)}.tcard b{display:block}.tcard small{color:var(--mute)}
+.ic{width:28px;height:28px;object-fit:contain;vertical-align:middle;margin-right:8px}
+.mob{display:inline-flex;align-items:center;gap:6px;margin:0 14px 4px 0;white-space:nowrap}
+.mob img{width:26px;height:26px;object-fit:contain}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:32px}@media(max-width:700px){.two{grid-template-columns:1fr}}
+.lead{font-size:17px;color:var(--mute);max-width:640px}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.fact{border:1px solid var(--line);border-radius:10px;padding:10px 14px}.fact b{display:block;font-size:20px;letter-spacing:-.01em}.fact span{color:var(--mute);font-size:13px}
+</style></head><body data-root="../">
+<header><div class="bar"><a class="brand" href="../index.html">MC Autobattler</a><nav><a href="../units/index.html" class="">Units</a><a href="../traits/index.html" class="on">Traits</a><a href="../items/index.html" class="">Items</a><a href="../pve/index.html" class="">PvE</a><a href="../rules/index.html" class="">Rules</a></nav>
+<div class="search"><input type="search" placeholder="Search  ( / )" aria-label="Search"><div class="results"></div></div></div></header>
+<main><div class="crumb"><a href="index.html">Traits</a></div><h1>Jungle</h1>
+<p class="sub">4 units &middot; breakpoints at 2, 4</p>
+<div class="card"><p>Earn Hunting Trophies for each Jungle takedown, doubled against enemies with over 1750 Health. After gaining enough Hunting Trophies, trade them in for Bounties of loot! Jungles gain Health and Damage Amp, increased 10% for each Bounty they&#x27;ve collected.</p><p>[Trophies: 0 | Bounties: 0]</p></div>
+<h2>Breakpoints</h2><div class="bp"><b>2</b><span>1 Trophy per takedown, 150 HP/20 Amp</span></div><div class="bp"><b>4</b><span>2 trophies per takedown, 350 HP/45 Amp</span></div><h2>Units</h2><div><h2><span class="cost1">1 cost</span></h2><div class="grid"><a class="tile" href="../units/panda.html" data-cost="1" data-traits="Jungle|Bruiser" data-name="panda"><img class="" src="../icons/PANDA.png" alt="" loading="lazy"><span><b class="cost1">Panda</b><small>Jungle, Bruiser</small></span></a></div></div><div><h2><span class="cost2">2 cost</span></h2><div class="grid"><a class="tile" href="../units/bogged.html" data-cost="2" data-traits="Jungle|Ranger" data-name="bogged"><img class="" src="../icons/BOGGED.png" alt="" loading="lazy"><span><b class="cost2">Bogged</b><small>Jungle, Ranger</small></span></a></div></div><div><h2><span class="cost3">3 cost</span></h2><div class="grid"><a class="tile" href="../units/parrot.html" data-cost="3" data-traits="Jungle|Disruptor" data-name="parrot"><img class="" src="../icons/PARROT.png" alt="" loading="lazy"><span><b class="cost3">Parrot</b><small>Jungle, Disruptor</small></span></a></div></div><div><h2><span class="cost4">4 cost</span></h2><div class="grid"><a class="tile" href="../units/ocelot.html" data-cost="4" data-traits="Jungle|Ambusher" data-name="ocelot"><img class="" src="../icons/OCELOT.png" alt="" loading="lazy"><span><b class="cost4">Ocelot</b><small>Jungle, Ambusher</small></span></a></div></div></main>
+<footer>Generated from game data &middot; version Beta.40.0</footer>
+<script>
+(function(){var i=document.querySelector('.search input'),r=document.querySelector('.results'),root=document.body.dataset.root,d=null,sel=-1;
+function load(){if(d)return Promise.resolve(d);return fetch(root+'search.json').then(function(x){return x.json()}).then(function(j){return d=j})}
+function show(q){q=q.trim().toLowerCase();if(!q){r.style.display='none';return}
+load().then(function(all){var m=all.filter(function(e){return e.n.toLowerCase().indexOf(q)>=0}).sort(function(a,b){return (a.n.toLowerCase().indexOf(q)!=0)-(b.n.toLowerCase().indexOf(q)!=0)}).slice(0,8);
+r.innerHTML=m.map(function(e){return '<a href="'+root+e.u+'">'+e.n+'<small>'+e.t+'</small></a>'}).join('')||'<a><small>No results</small></a>';r.style.display='block';sel=-1})}
+i.addEventListener('input',function(){show(i.value)});
+i.addEventListener('keydown',function(e){var a=r.querySelectorAll('a[href]');if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();sel=(sel+(e.key==='ArrowDown'?1:-1)+a.length)%a.length;a.forEach(function(x,k){x.classList.toggle('sel',k==sel)})}
+else if(e.key==='Enter'&&a.length){location.href=a[Math.max(sel,0)].href}else if(e.key==='Escape'){r.style.display='none'}});
+document.addEventListener('click',function(e){if(!e.target.closest('.search'))r.style.display='none'});
+document.addEventListener('keydown',function(e){if(e.key==='/'&&document.activeElement!==i&&!/input|select/i.test(document.activeElement.tagName)){e.preventDefault();i.focus()}});
+})();
+</script></body></html>

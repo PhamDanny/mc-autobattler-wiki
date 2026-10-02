@@ -81,8 +81,8 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
 <div class="stats"><table><tr><td>Health</td><td class='n'>1100</td></tr><tr><td>Attack damage</td><td class='n'>45</td></tr><tr><td>Ability power</td><td class='n'>100</td></tr><tr><td>Armor / Magic resist</td><td class='n'>60 / 60</td></tr><tr><td>Attack speed</td><td class='n'>0.7</td></tr><tr><td>Range</td><td class='n'>1</td></tr><tr><td>Starting mana / cost</td><td class='n'>0 / 70</td></tr><tr><td>Move speed</td><td class='n'>2.2</td></tr></table></div></div>
 <h2>Ability</h2>
 <div class="card"><h3>Mycelial Bloom</h3><p>Spores the 2 nearest enemies for 300/450/9999% AP magic damage over 4s. Heals for 20/30/100% of all damage spored enemies take. Spores jump to 2 new enemies when a host dies.</p></div>
-<h2><a href="../traits/fungal.html">Fungal</a></h2><p>Each round, every infected ally infects another. Infected units permanently gain 1 Attack Damage and Ability Power each round. Mooshroom starts infected.</p><div class="bp"><b>1</b><span>The infection spreads</span></div><h2>Other Fungal units</h2><div class="roster"></div></main>
-<footer>Generated from game data &middot; version 1.8.0</footer>
+<h2><a href="../traits/fungal.html">Fungal</a></h2><p>Units with a Fungal Stack are infected. Each round, every infected ally gives a different random ally 1 Fungal Stack. Each Stack is permanently worth 1 Attack Damage and 1 Ability Power. Mooshroom starts with 1 Stack.</p><div class="bp"><b>1</b><span>The infection spreads</span></div><h2>Other Fungal units</h2><div class="roster"></div></main>
+<footer>Generated from game data &middot; version 1.9.0</footer>
 <script>
 (function(){var i=document.querySelector('.search input'),r=document.querySelector('.results'),root=document.body.dataset.root,d=null,sel=-1;
 function load(){if(d)return Promise.resolve(d);return fetch(root+'search.json').then(function(x){return x.json()}).then(function(j){return d=j})}
